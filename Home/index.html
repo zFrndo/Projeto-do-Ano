@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metohelp</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <aside class="barralateral" id="barraLateral">
+        <div class="topoSidebar" id="topoSidebar"></div>
+
+        <nav class="navBarraLateral">
+            <a href="">Configurações</a>
+            <a href="">To do list</a>
+            <a href="../Recomendacoes/recomendacoes.html">Recomendação de conteúdos</a>
+        </nav>
+
+        <div class="calendario">
+            <div class="cabecalhoCalendario">
+                <button class="mesAnterior" onclick="mudarMes(-1)">‹</button>
+                <span id="mesAno"></span>
+                <button class="proximoMes" onclick="mudarMes(1)">›</button>
+            </div>
+
+            <div class="diasSemana">
+                <span class="domingo">Dom</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sab</span>
+            </div>
+
+            <div class="dias" id="diasCalendario"></div>
+        </div>
+    </aside>
+
+    <div class="conteudo" id="conteudo">
+        <button class="btnmenu" id="btnMenu"
+            onclick="toggleMenu()" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="imgPerfil" id="imgPerfil">
+            <img
+                src="https://cdn-icons-png.flaticon.com/512/6819/6819113.png"
+                alt="Foto de perfil">
+        </div>
+
+        <main class="main-container">
+            <section class="bemvindo">
+                <p class="subtitulo">
+                    <h1 id="saudacao"></h1>
+                    <span class="data" id="dataAtual"></span>
+                    Como vamos estudar hoje?
+                </p>
+            </section>
+
+            <section class="metodos-container">
+                <div class="grid-metodo" id="gridMetodos"></div>
+
+                <button class="seta-metodos" id="setaMetodos"
+                    aria-label="Próximos métodos">→</button>
+            </section>
+
+            <section class="grid-desempenho">
+                <h3>Desempenho dessa semana:</h3>
+
+                <div class="desempenho-item">
+                    <span>Horas estudadas:</span>
+
+                    <div class="barra-progresso horas">
+                        <div class="progresso"></div>
+                    </div>
+
+                    <span class="valor">12/12</span>
+                </div>
+
+                <div class="desempenho-item">
+                    <span>Métodos utilizados:</span>
+
+                    <div class="barra-progresso metodos">
+                        <div class="progresso"></div>
+                    </div>
+
+                    <span class="valor">6/6</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>

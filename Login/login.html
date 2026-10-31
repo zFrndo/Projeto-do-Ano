@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Metohelp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <main class="login-container">
+    <section class="form-side">
+      <div class="form-content">
+        <h1>Bem vindo de volta!<br>Qual a programação de hoje?</h1>
+        <p class="intro">Digite seu nome de usuário e senha<br class="desktop-break"> para continuarmos nossos estudos!</p>
+
+        <form id="login-form">
+          <div class="field-group">
+            <label for="username">Usuário:</label>
+            <input id="username" name="username" type="text" autocomplete="username" required>
+          </div>
+
+          <div class="field-group">
+            <label for="password">Senha:</label>
+            <div class="password-wrapper">
+              <input id="password" name="password" type="password" autocomplete="current-password" required>
+              <button class="toggle-password" type="button" id="toggle-password" aria-label="Mostrar senha">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button class="submit-button" id="login-button" type="submit">Entrar</button>
+          <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="brand-side">
+      <img class="logo" src="../Imagens/Logo.png" alt="Logo Metohelp">
+      <div class="brand-copy">
+        <h2>Ainda não possui cadastro?</h2>
+        <p>Sem problemas. Clique abaixo para se inscrever!</p>
+        <a class="switch-button" href="../Cadastro/cadastro.html">Inscreva-se</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primeira Vez | Metohelp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Ícone das 3 barras coloridas */
+    .brand-icon {
+      display: flex;
+      gap: 6px;
+      height: 60px;
+      margin-bottom: 24px;
+    }
+
+    .brand-icon .bar {
+      width: 18px;
+      height: 100%;
+    }
+
+    .bar-cyan { background-color: #80f3e3; }
+    .bar-lime { background-color: #a3ff00; }
+    .bar-orange { background-color: #ff7a29; }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    p.description {
+      font-size: 16px;
+      color: #000;
+      line-height: 1.4;
+      margin-bottom: 30px;
+    }
+
+    .btn-tour {
+      width: 160px;
+      height: 48px;
+      border-radius: 24px;
+      border: 2px solid #777777;
+      background-color: #a6a6a6;
+      color: #333333;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: not-allowed;
+      margin-bottom: 4px;
+    }
+
+    .subtext {
+      font-size: 11px;
+      color: #000;
+      margin-bottom: 20px;
+    }
+
+    .not-needed {
+      font-size: 15px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 12px;
+    }
+
+    .btn-login {
+      width: 160px;
+      height: 44px;
+      border-radius: 22px;
+      border: 1.5px solid #80f3e3;
+      background-color: #d9fff8;
+      color: #3ad4be;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <!-- Ícone Triplo -->
+    <div class="brand-icon">
+      <div class="bar bar-cyan"></div>
+      <div class="bar bar-lime"></div>
+      <div class="bar bar-orange"></div>
+    </div>
+
+    <h1>Primeira vez por aqui?</h1>
+    
+    <p class="description">
+      Conheça nosso site e o que ele tem<br>para oferecer!
+    </p>
+
+    <!-- Botão Fazer Tour (Indisponível) -->
+    <button class="btn-tour" disabled>Fazer tour</button>
+    <span class="subtext">Ainda não disponível</span>
+
+    <span class="not-needed">Não preciso de tour</span>
+
+    <!-- Botão Fazer Login -->
+    <button id="btn-login" class="btn-login">Fazer login</button>
+  </main>
+
+  <script>
+    document.getElementById("btn-login").addEventListener("click", () => {
+      // Regista que o utilizador já passou pela tela de boas-vindas
+      localStorage.setItem("metohelp_ja_visitou", "true");
+      // Redireciona para o login
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

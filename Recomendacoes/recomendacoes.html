@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metohelp | Recomendação de conteúdos</title>
+    <link rel="stylesheet" href="recomendacoes.css">
+</head>
+<body>
+    <div class="imgPerfil">
+        <img src="https://cdn-icons-png.flaticon.com/512/6819/6819113.png" alt="Foto de perfil">
+    </div>
+
+    <aside class="barralateral" id="barraLateral">
+        <div class="topoSidebar" id="topoSidebar"></div>
+
+        <nav class="navBarraLateral">
+            <a href="../Home/index.html">Home</a>
+            <a href="../Configuracoes/configuracoes.html">Configurações</a>
+            <a href="../ToDoList/todolist.html">To do list</a>
+            <a class="link-atual" href="recomendacoes.html">Recomendação de conteúdos</a>
+        </nav>
+
+        <div class="calendario">
+            <div class="cabecalhoCalendario">
+                <button class="mesAnterior" onclick="mudarMes(-1)" aria-label="Mês anterior">‹</button>
+                <span id="mesAno"></span>
+                <button class="proximoMes" onclick="mudarMes(1)" aria-label="Próximo mês">›</button>
+            </div>
+
+            <div class="diasSemana">
+                <span class="domingo">Dom</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sab</span>
+            </div>
+            <div class="dias" id="diasCalendario"></div>
+        </div>
+    </aside>
+
+    <div class="conteudo" id="conteudo">
+        <header class="headerEfeitoVidro">
+            <button class="btnmenu" id="btnMenu" onclick="toggleMenu()" aria-label="Abrir menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </header>
+
+        <main class="main-container">
+            <section class="cabecalho-pagina">
+                <div>
+                </div>
+
+                <button class="botao-filtro" id="abrirFiltros" aria-label="Abrir filtros" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        <circle cx="8" cy="6" r="2"></circle>
+                        <circle cx="15" cy="12" r="2"></circle>
+                        <circle cx="10" cy="18" r="2"></circle>
+                    </svg>
+                    <span class="indicador-filtro" id="indicadorFiltro"></span>
+                </button>
+            </section>
+
+            <div class="filtros-ativos" id="filtrosAtivos" hidden></div>
+            <p class="resultado" id="textoResultado">Conteúdos selecionados para você</p>
+
+            <div id="listaCategorias"></div>
+
+            <p class="sem-resultados" id="semResultados" hidden>
+                Nenhum conteúdo encontrado com esses filtros. Tente alterar as opções.
+            </p>
+        </main>
+    </div>
+
+    <div class="fundo-modal" id="fundoModal" hidden>
+        <section class="painel-filtros" role="dialog" aria-modal="true" aria-labelledby="tituloFiltros">
+            <div class="topo-filtros">
+                <div>
+                    <p class="sobre-titulo">PERSONALIZE</p>
+                    <h2 id="tituloFiltros">Filtrar conteúdos</h2>
+                </div>
+                <button class="fechar" id="fecharFiltros" aria-label="Fechar filtros">×</button>
+            </div>
+
+            <div class="grupo-filtro">
+                <button class="titulo-grupo" data-toggle="tipo" aria-expanded="true">
+                    <span>Tipo</span><span class="valor-filtro" id="resumoTipo">Todos</span><span class="seta">⌃</span>
+                </button>
+                <div class="opcoes" id="opcoesTipo">
+                    <label><input type="checkbox" name="tipo" value="Vídeos" checked> Vídeos</label>
+                    <label><input type="checkbox" name="tipo" value="Livros" checked> Livros</label>
+                    <label><input type="checkbox" name="tipo" value="Resenhas" checked> Resenhas</label>
+                    <label><input type="checkbox" name="tipo" value="Filmes" checked> Filmes</label>
+                </div>
+            </div>
+
+            <div class="grupo-filtro">
+                <button class="titulo-grupo" data-toggle="area" aria-expanded="false">
+                    <span>Área</span><span class="valor-filtro" id="resumoArea">Todas</span><span class="seta">⌄</span>
+                </button>
+                <div class="opcoes" id="opcoesArea" hidden>
+                    <label><input type="checkbox" name="area" value="Conhecimentos gerais" checked> Conhecimentos gerais</label>
+                    <label><input type="checkbox" name="area" value="Ciências da Natureza" checked> Ciências da Natureza</label>
+                    <label><input type="checkbox" name="area" value="Humanas" checked> Ciências Humanas</label>
+                    <label><input type="checkbox" name="area" value="Linguagens" checked> Linguagens</label>
+                    <label><input type="checkbox" name="area" value="Matemática" checked> Matemática</label>
+                    <label><input type="checkbox" name="area" value="Resenhas literárias" checked> Resenhas literárias</label>
+                    <label><input type="checkbox" name="area" value="A equipe recomenda" checked> A equipe recomenda</label>
+                </div>
+            </div>
+
+            <div class="grupo-filtro">
+                <button class="titulo-grupo" data-toggle="data" aria-expanded="false">
+                    <span>Data do upload</span><span class="valor-filtro" id="resumoData">Qualquer</span><span class="seta">⌄</span>
+                </button>
+                <div class="opcoes" id="opcoesData" hidden>
+                    <label><input type="radio" name="data" value="qualquer" checked> Qualquer data</label>
+                    <label><input type="radio" name="data" value="ano"> Último ano</label>
+                    <label><input type="radio" name="data" value="mes"> Último mês</label>
+                    <label><input type="radio" name="data" value="semana"> Última semana</label>
+                </div>
+            </div>
+
+            <div class="acoes-filtro">
+                <button class="limpar" id="limparFiltros">Limpar filtros</button>
+                <button class="aplicar" id="aplicarFiltros">Mostrar resultados</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="recomendacoes.js"></script>
+</body>
+</html>

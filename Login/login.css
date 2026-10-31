@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Pliant', Arial, sans-serif;
+}
+
+:root {
+    --mint: #83eadb;
+    --mint-light: #d9fff6;
+    --green: #9cff19;
+    --green-light: #e4ffbd;
+    --text: #080808;
+    --border: #555;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    background: #fff;
+    color: var(--text);
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+.login-container {
+    width: min(100%, 1050px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(42px, 8vw, 105px);
+}
+
+.form-side {
+    width: 100%;
+}
+
+.form-content {
+    width: min(100%, 440px);
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: clamp(20px, 2.15vw, 27px);
+    line-height: 1.28;
+    font-weight: 700;
+    letter-spacing: -0.7px;
+}
+
+.intro {
+    margin-top: 12px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.35;
+    color: #222;
+}
+
+.field-group {
+    margin-bottom: 15px;
+}
+
+.field-group label {
+    display: block;
+    margin: 0 0 7px 3px;
+    font-size: 16px;
+}
+
+.field-group input {
+    display: block;
+    width: 100%;
+    height: 43px;
+    padding: 0 12px;
+    border: 1.3px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+    font-size: 15px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.field-group input:focus {
+    border-color: var(--mint);
+    box-shadow: 0 0 0 3px rgb(131 234 219 / 22%);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 45px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 25px;
+    height: 25px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.toggle-password svg {
+    width: 17px;
+    fill: none;
+    stroke: #666;
+    stroke-width: 1.8;
+}
+
+.submit-button,
+.switch-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 116px;
+    height: 42px;
+    padding: 0 25px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .18s, filter .18s, box-shadow .18s;
+}
+
+.submit-button {
+    margin: 18px auto 0;
+    border: 1.5px solid #8af000;
+    background: var(--green-light);
+    color: #78df00;
+}
+
+.submit-button:hover,
+.switch-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(.98);
+}
+
+.submit-button:disabled {
+    opacity: .65;
+    cursor: wait;
+    transform: none;
+}
+
+.brand-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo {
+    display: block;
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 23px;
+}
+
+.brand-copy h2 {
+    margin-bottom: 10px;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.brand-copy p {
+    margin-bottom: 17px;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.switch-button {
+    min-width: 138px;
+    height: 39px;
+    border: 1.5px solid #75e8d5;
+    background: #dcfff8;
+    color: #79e5d3;
+}
+
+.feedback {
+    min-height: 20px;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.feedback.error {
+    color: #c62828;
+}
+
+.feedback.success {
+    color: #258548;
+}
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 38px 22px;
+    }
+
+    .login-container {
+        max-width: 430px;
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .form-content {
+        margin: 0;
+    }
+
+    .brand-side {
+        order: -1;
+    }
+
+    .logo {
+        width: 130px;
+        margin-bottom: 12px;
+    }
+
+    .brand-copy h2 {
+        font-size: 17px;
+    }
+
+    .brand-copy p {
+        font-size: 13px;
+    }
+
+    .intro {
+        margin-bottom: 22px;
+    }
+}

@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pliant', Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #030303;
+}
+
+/* CONTAINER PRINCIPAL */
+.pomodoro-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+#tituloTimer {
+    font-size: clamp(50px, 5vw, 80px);
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.barra-container {
+    width: 78%;
+    max-width: 1300px;
+    height: 80px;
+    border: 6px solid #8cf53b;
+    border-radius: 45px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.barra-progresso {
+    width: 100%;
+    height: 100%;
+    background-color: #dfffba;
+    border-radius: 40px;
+    transition:
+        width 1s linear;
+}
+
+.tempo-restante {
+    margin-top: 15px;
+    font-size: 26px;
+}
+
+.recomendacoes {
+    display: none;
+    width: 90%;
+    max-width: 1400px;
+    margin-top: 45px;
+    text-align: center;
+}
+
+body.pausa .recomendacoes {
+    display: block;
+}
+
+.recomendacoes h2 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+
+.videos {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.card-canal {
+    height: 180px;
+    border: 2px solid #85f0e5;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card-canal:hover {
+    transform: translateY(-7px);
+    box-shadow:
+        0 10px 20px
+        rgba(0, 0, 0, 0.10);
+}
+
+.card-canal img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+body.pausa #tituloTimer {
+    color: #5bb318;
+}
+
+body.pausa .barra-container {
+    border-color: #8cf53b;
+}
+
+body.pausa .barra-progresso {
+    background-color: #dfffba;
+}
+
+@media (max-width: 1000px) {
+    .videos {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .pomodoro-container {
+        min-height: 100vh;
+        padding: 30px 0;
+    }
+
+    #tituloTimer {
+        font-size: 44px;
+        margin-bottom: 25px;
+    }
+
+    .barra-container {
+        width: 90%;
+        height: 60px;
+    }
+
+    .tempo-restante {
+        font-size: 22px;
+    }
+
+    .videos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card-canal {
+        height: 160px;
+    }
+}

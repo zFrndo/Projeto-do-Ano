@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pliant', Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #030303;
+}
+
+.timeboxing-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.escolha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.escolha h1 {
+    font-size: 70px;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
+.seletor-tempo {
+    display: flex;
+    align-items: center;
+    font-size: 120px;
+    cursor: pointer;
+}
+
+.campo-tempo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* NÚMERO */
+.campo-tempo span {
+    min-width: 65px;
+    text-align: center;
+}
+
+.seta {
+    display: none;
+    border: none;
+    background: none;
+    color: #b4b4b4;
+    font-size: 18px;
+    cursor: pointer;
+    width: 40px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+}
+
+.seletor-tempo.ativo .seta {
+    display: flex;
+}
+
+.seta:hover {
+    transform: scale(1.2);
+}
+
+.dois-pontos {
+    margin: 0 5px;
+}
+
+.botao-comecar {
+    margin-top: 35px;
+    width: 200px;
+    height: 50px;
+    border: 2px solid #ff7020;
+    background-color: #ffbf99;
+    color: #ff7020;
+    font-size: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.botao-comecar:hover {
+    transform: scale(1.04);
+    background-color: #ffb184;
+}
+
+.timer {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tituloTimer {
+    font-size: clamp(50px, 5vw, 80px);
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #030303;
+}
+
+.barra-container {
+    width: 78%;
+    max-width: 1300px;
+    height: 80px;
+    border: 6px solid #ff7020;
+    border-radius: 45px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+
+.barra-progresso {
+    width: 100%;
+    height: 100%;
+    background-color: #ffd1b8;
+    border-radius: 40px;
+    transition:
+        width 1s linear;
+}
+
+.tempo-restante {
+    margin-top: 15px;
+    font-size: 26px;
+}
+
+.recomendacoes {
+    display: none;
+    width: 90%;
+    max-width: 1400px;
+    margin-top: 45px;
+    text-align: center;
+}
+
+.recomendacoes h2 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+
+.videos {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.card-canal {
+    height: 180px;
+    border: 2px solid #8cf53b;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card-canal:hover {
+    transform: translateY(-7px);
+    box-shadow:
+        0 10px 20px
+        rgba(0, 0, 0, 0.10);
+}
+
+.card-canal img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+body.finalizado #tituloTimer {
+    color: #ff7020;
+}
+
+@media (max-width: 1000px) {
+    .videos {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 600px) {
+    .timeboxing-container {
+        min-height: 100vh;
+        padding: 30px 0;
+    }
+
+    .escolha h1 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .seletor-tempo {
+        font-size: 42px;
+    }
+
+    #tituloTimer {
+        font-size: 44px;
+    }
+
+    .barra-container {
+        width: 90%;
+        height: 60px;
+    }
+
+    .tempo-restante {
+        font-size: 22px;
+    }
+
+    .videos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card-canal {
+        height: 160px;
+    }
+
+}
