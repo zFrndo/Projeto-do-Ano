@@ -4,7 +4,7 @@ const supabaseClient = Metohelp.client;
 // Se já estiver logado, vai direto para a Home
 if (supabaseClient) {
     supabaseClient.auth.getSession().then(({ data }) => {
-        if (data.session) window.location.href = "../Home/index.html";
+        if (data.session) window.location.href = "../idex.html";
     });
 }
 
@@ -104,7 +104,7 @@ loginForm.addEventListener("submit", async (event) => {
 
         // Redirecionamento para a página inicial (Home)
         setTimeout(() => {
-            window.location.href = "../Home/index.html";
+            window.location.href = "../index.html";
         }, 1000);
 
     } catch (error) {
