@@ -109,6 +109,8 @@ function atualizarData() {
     dataAtual.textContent = `${dia}/${mes}/${ano}`;
 }
 
+let nomeUsuario = "";
+
 function atualizarSaudacao() {
     const hora = new Date().getHours();
 
@@ -124,7 +126,7 @@ function atualizarSaudacao() {
         mensagem = "Boa Madrugada";
     }
 
-    saudacao.textContent = `${mensagem}, Frndo`;
+    saudacao.textContent = nomeUsuario ? `${mensagem}, ${nomeUsuario}` : mensagem;
 }
 
 atualizarData();
@@ -149,10 +151,10 @@ const metodos = [
         pagina: "../Metodos/Timeboxing/timeboxing.html"
     },
     {
-        nome: "Feyman",
+        nome: "Feynman",
         descricao: "Ler + explicar",
         classe: "card-customizar",
-        pagina: "../Metodos/Feyman/feyman.html"
+        pagina: "../Metodos/Feynman/feynman.html"
     },
     {
         nome: "Regra 52/17",
@@ -164,7 +166,7 @@ const metodos = [
         nome: "Ultradiana",
         descricao: "90/20",
         classe: "card-timeboxing",
-        pagina: "../Metodos/Ultradiana/Ultradiana.html"
+        pagina: "../Metodos/Ultradiana/ultradiana.html"
     },
     {
         nome: "60-30-10",
@@ -221,3 +223,38 @@ function proximaPaginaMetodos() {
 setaMetodos.addEventListener("click", proximaPaginaMetodos);
 
 mostrarMetodos();
+
+
+/* DADOS DO USUÁRIO + DESEMPENHO (Supabase) */
+
+// Só horas inteiras completas: fica 0 até fechar 1h; aí vira 1, depois 2...
+function formatarHoras(segundos) {
+    return String(Math.floor(segundos / 3600));
+}
+
+async function iniciarHome() {
+    const { profile } = await Metohelp.exigirLogin();
+
+    nomeUsuario = profile?.nome || profile?.username || "";
+    atualizarSaudacao();
+    document.getElementById("fotoHome").src = profile?.foto_url || Metohelp.FOTO_PADRAO;
+    if (profile?.cor_site) document.body.style.backgroundColor = profile.cor_site;
+
+    const stats = await Metohelp.estatisticas();
+    if (!stats) return;
+
+    const { horasSemana, totalMetodos } = Metohelp.METAS;
+    const horasFeitas = stats.semana_segundos / 3600;
+    const metodosFeitos = Math.min(stats.semana_metodos, totalMetodos);
+
+    document.getElementById("valorHoras").textContent =
+        `${formatarHoras(stats.semana_segundos)}/${horasSemana}h`;
+    document.getElementById("progressoHoras").style.width =
+        `${Math.min(100, (horasFeitas / horasSemana) * 100)}%`;
+
+    document.getElementById("valorMetodos").textContent = `${metodosFeitos}/${totalMetodos}`;
+    document.getElementById("progressoMetodos").style.width =
+        `${(metodosFeitos / totalMetodos) * 100}%`;
+}
+
+iniciarHome();

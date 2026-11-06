@@ -210,6 +210,9 @@ function iniciarTimeboxing() {
     tempoAtual =
         tempoTotal;
 
+    // Registra o uso do método no Supabase
+    MetohelpFim.iniciar("timeboxing", "Timeboxing");
+
     configuracao.style.display =
         "none";
 
@@ -297,10 +300,14 @@ function finalizarTimeboxing() {
     );
     mostrarRecomendacoes();
 
+    // Tempo acabou: pede a autoavaliação (ou sair sem avaliar)
+    MetohelpFim.abrir();
+
 }
 
 /* RECOMENDACOES */
 function mostrarRecomendacoes() {
+    Metohelp.mostrarLivros(document.getElementById("livrosRecomendados"));
     videosRecomendados.innerHTML =
         "";
 
@@ -361,3 +368,6 @@ function mostrarRecomendacoes() {
 
 /* INICIALIZAÇÃO */
 atualizarTempoSelecionado();
+
+/* Exige login para usar o método */
+Metohelp.exigirLogin();

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metohelp - Feynman</title>
+    <link rel="stylesheet" href="feynman.css">
+</head>
+<body>
+    <main class="feynman-container">
+
+        <!-- ETAPA 1: TEMA -->
+        <section class="etapa ativa" id="etapaTema">
+            <h1>O que você vai estudar?</h1>
+            <input type="text" id="inputTema" maxlength="80" placeholder="Ex.: Fotossíntese" autocomplete="off">
+            <button class="botao" id="botaoComecar">Começar</button>
+        </section>
+
+        <!-- ETAPA 2: ESTUDAR -->
+        <section class="etapa" id="etapaLer">
+            <p class="passo">Passo 1 de 3</p>
+            <h1>Leia e estude</h1>
+            <p class="tema-atual" id="temaLer"></p>
+
+            <div class="barra-container"><div class="barra-progresso" id="barraProgresso"></div></div>
+            <p class="tempo-restante" id="tempoRestante"></p>
+
+            <button class="botao" id="botaoExplicar">Já estudei, vou explicar</button>
+        </section>
+
+        <!-- ETAPA 3: EXPLICAR -->
+        <section class="etapa" id="etapaExplicar">
+            <p class="passo">Passo 2 de 3</p>
+            <h1>Explique com suas palavras</h1>
+            <p class="dica">Escreva como se estivesse ensinando uma criança de 10 anos. Sem consultar o material!</p>
+            <textarea id="textoExplicacao" placeholder="Comece a explicar aqui..."></textarea>
+            <button class="botao" id="botaoLacunas">Terminei de explicar</button>
+        </section>
+
+        <!-- ETAPA 4: LACUNAS -->
+        <section class="etapa" id="etapaLacunas">
+            <p class="passo">Passo 3 de 3</p>
+            <h1>Onde você travou?</h1>
+            <p class="dica">Anote o que não soube explicar ou onde usou termos difíceis. Esses são os pontos para rever.</p>
+            <textarea id="textoLacunas" placeholder="Ex.: não lembrei o que é a clorofila..."></textarea>
+            <div class="linha-botoes">
+                <button class="botao secundario" id="botaoRever">Voltar ao material</button>
+                <button class="botao" id="botaoConcluir">Concluir</button>
+            </div>
+        </section>
+
+        <!-- RECOMENDAÇÕES -->
+        <section class="recomendacoes" id="recomendacoes">
+            <h2>Você também pode ver:</h2>
+            <div class="videos" id="videosRecomendados"></div>
+
+            <h2 class="titulo-livros">Que tal ler um livro?</h2>
+            <div class="videos" id="livrosRecomendados"></div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../Shared/metohelp.js"></script>
+    <script src="../../Shared/livros.js"></script>
+    <script src="../../Shared/fim-sessao.js"></script>
+    <script src="feynman.js"></script>
+</body>
+</html>

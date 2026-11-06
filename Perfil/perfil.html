@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil | Metohelp</title>
+    <link rel="stylesheet" href="perfil.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- BOTÃO MENU -->
+    <button class="btnmenu" id="btnMenu" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- BARRA LATERAL -->
+    <aside class="barralateral" id="barraLateral">
+        <div class="topoSidebar">
+            <span class="identidade-menu">Metohelp</span>
+        </div>
+
+        <nav class="navBarraLateral">
+            <a href="../Home/index.html">Home</a>
+            <a href="../Perfil/perfil.html">Perfil</a>
+            <a href="todo.html">To do list</a>
+            <a href="../Recomendacoes/recomendacoes.html">Recomendação de conteúdos</a>
+        </nav>
+
+        <!-- CALENDÁRIO -->
+        <div class="calendario">
+            <div class="cabecalhoCalendario">
+                <button class="mesAnterior" onclick="mudarMes(-1)">‹</button>
+                <span id="mesAno"></span>
+                <button class="proximoMes" onclick="mudarMes(1)">›</button>
+            </div>
+
+            <div class="diasSemana">
+                <span class="domingo">Dom</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sab</span>
+            </div>
+
+            <div class="dias" id="diasCalendario"></div>
+        </div>
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <div class="conteudo" id="conteudo">
+
+        <header class="cabecalho-pagina">
+            <!-- USANDO IMAGEM PARA A LOGO -->
+            <img src="../Imagens/Logo_V2.png" alt="Metohelp" class="logo">
+        </header>
+
+        <main class="main-container">
+
+            <section class="perfil-container">
+
+                <div class="lado-esquerdo">
+                    <div class="frase" id="fraseMotivacional">
+                        "A motivação acende, a constância mantém."
+                    </div>
+
+                    <nav class="menu-perfil">
+                        <a href="#" id="abrirAvaliacoes">Autoavaliações</a>
+                    </nav>
+                </div>
+
+                <div class="lado-direito">
+
+                    <div class="perfil-topo">
+                        <div class="informacoes-usuario">
+                            <div class="nome-linha">
+                                <button class="editar-btn" id="abrirEdicao">editar perfil</button>
+                                <h1 id="nomeUsuario">Frndo</h1>
+                            </div>
+                            <span class="titulo-perfil" id="tituloUsuario">"Estudante dedicada"</span>
+                        </div>
+
+                        <img src="img/foto-perfil.png" alt="Foto de perfil" id="fotoPerfil" class="foto-perfil">
+                    </div>
+
+                    <div class="estatisticas">
+                        <div class="estatistica">
+                            <strong id="diasEstudo">01</strong>
+                            <span>Dias<br>estudando</span>
+                        </div>
+
+                        <div class="estatistica">
+                            <strong id="metodosUsados">09</strong>
+                            <span>Métodos<br>utilizados</span>
+                        </div>
+
+                        <div class="estatistica">
+                            <strong id="conquistas">0</strong>
+                            <span>Títulos<br>desbloqueados</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ÚLTIMO LIVRO ACESSADO -->
+            <section class="livro-secao">
+                <h2>Último livro acessado</h2>
+
+                <a href="https://meclivros.mec.gov.br/" target="_blank" rel="noopener noreferrer" class="livro-card" id="linkLivro">
+                    <img src="img/capa-livro.png" alt="Capa do último livro" id="capaLivro">
+
+                    <div class="livro-info">
+                        <h3 id="nomeLivro">Nome do livro</h3>
+                        <p id="autorLivro">Autor do livro</p>
+                        <span>Continuar lendo ↗</span>
+                    </div>
+                </a>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL EDITAR PERFIL -->
+    <div class="modal-overlay" id="modalEdicao">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2>Editar perfil</h2>
+                    <p>Personalize seu espaço no Metohelp.</p>
+                </div>
+                <button class="fechar-modal" data-fechar="modalEdicao">×</button>
+            </div>
+
+            <form id="formPerfil">
+                <div class="campo-foto">
+                    <img src="img/foto-perfil.png" id="previewFoto" alt="Prévia da foto">
+                    <label for="inputFoto" class="upload-foto">Alterar foto</label>
+                    <input type="file" id="inputFoto" accept="image/*" hidden>
+                </div>
+
+                <div class="campo">
+                    <label for="inputNome">Nome</label>
+                    <input type="text" id="inputNome" maxlength="30" placeholder="Seu nome">
+                </div>
+
+                <div class="campo">
+                    <label for="inputTitulo">Seu título</label>
+                    <select id="inputTitulo"></select>
+                    <div class="titulos-bloqueados">
+                        <h3>Títulos bloqueados</h3>
+                        <div id="listaBloqueados"></div>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label>Cor de fundo da frase</label>
+                    <div class="opcoes-cores" id="coresFrase">
+                        <button type="button" class="cor-opcao rosa" data-cor="#fff1f8"></button>
+                        <button type="button" class="cor-opcao verde" data-cor="#efffe9"></button>
+                        <button type="button" class="cor-opcao amarelo" data-cor="#fff8dc"></button>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label>Cor de fundo do site</label>
+                    <div class="opcoes-cores" id="coresSite">
+                        <button type="button" class="cor-opcao branco" data-cor="#ffffff"></button>
+                        <button type="button" class="cor-opcao cinza" data-cor="#f5f5f5"></button>
+                        <button type="button" class="cor-opcao rosa-fundo" data-cor="#fff5fa"></button>
+                        <button type="button" class="cor-opcao azul" data-cor="#f1f6ff"></button>
+                    </div>
+                </div>
+
+                <button type="submit" class="salvar-btn">Salvar alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL AUTOAVALIAÇÕES -->
+    <div class="modal-overlay" id="modalAvaliacoes">
+        <div class="modal modal-avaliacoes">
+            <div class="modal-header">
+                <div>
+                    <h2>Autoavaliações</h2>
+                    <p>Confira seu histórico de estudos.</p>
+                </div>
+                <button class="fechar-modal" data-fechar="modalAvaliacoes">×</button>
+            </div>
+            
+            <div class="resumo-avaliacoes">
+                <span>Total de avaliações: <strong id="totalAvaliacoes">0</strong></span>
+                <span>Último método: <strong id="ultimoMetodo">--</strong></span>
+            </div>
+
+            <div class="historico-avaliacoes" id="historicoAvaliacoes"></div>
+        </div>
+    </div>
+
+    <!-- MODAL DETALHES -->
+    <div class="modal-overlay" id="modalDetalhes">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Detalhes da avaliação</h2>
+                <button class="fechar-modal" data-fechar="modalDetalhes">×</button>
+            </div>
+            <div id="detalhesAvaliacao"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../Shared/metohelp.js"></script>
+    <script src="../Shared/livros.js"></script>
+    <script src="perfil.js"></script>
+</body>
+</html>

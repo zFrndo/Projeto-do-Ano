@@ -1,11 +1,5 @@
-// Configuração do Supabase
-const SUPABASE_URL = "SUA_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "SUA_SUPABASE_ANON_KEY";
-
-let supabaseClient = null;
-if (window.supabase && SUPABASE_URL !== "SUA_SUPABASE_URL") {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-}
+// Cliente do Supabase (configurado em ../Shared/metohelp.js)
+const supabaseClient = Metohelp.client;
 
 // Estados temporários do cadastro
 let cadastroData = {
@@ -57,17 +51,17 @@ formStep2.addEventListener("submit", async (e) => {
 
     if (!username) return;
 
-    // Verificar se o username já existe na base de dados via Supabase
+    // Verificar se o nome de usuário está livre (função segura no Supabase)
     if (supabaseClient) {
         try {
-            const { data, error } = await supabaseClient
-                .from("profiles")
-                .select("username")
-                .eq("username", username)
-                .maybeSingle();
+            const { data: livre, error } = await supabaseClient.rpc(
+                "username_disponivel",
+                { input_username: username }
+            );
 
-            if (data) {
-                // Se encontrar um registo, exibe o aviso em laranja idêntico à imagem
+            if (error) throw error;
+
+            if (livre === false) {
                 errorMsg.style.display = "block";
                 return;
             }
@@ -99,47 +93,51 @@ document.querySelectorAll(".preview-card").forEach(card => {
 
 // ETAPA 4: Finalizar e Gravar no Supabase Auth + Profiles
 btnFinalize.addEventListener("click", async () => {
+    if (!supabaseClient) {
+        alert("Configure os dados do Supabase no arquivo Shared/metohelp.js.");
+        return;
+    }
+
     btnFinalize.disabled = true;
     btnFinalize.textContent = "A criar conta...";
 
-    if (supabaseClient) {
-        try {
-            // 1. Criar utilizador no Supabase Auth
-            const { data: authData, error: authError } = await supabaseClient.auth.signUp({
-                email: cadastroData.email,
-                password: cadastroData.password
-            });
-
-            if (authError) throw authError;
-
-            // 2. Inserir dados adicionais na tabela 'profiles'
-            if (authData.user) {
-                const { error: profileError } = await supabaseClient
-                    .from("profiles")
-                    .insert([
-                        {
-                            id: authData.user.id,
-                            username: cadastroData.username,
-                            email: cadastroData.email,
-                            theme: cadastroData.theme
-                        }
-                    ]);
-
-                if (profileError) throw profileError;
+    try {
+        // O perfil (username e tema) é criado automaticamente no banco por um trigger
+        const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+            email: cadastroData.email,
+            password: cadastroData.password,
+            options: {
+                data: {
+                    username: cadastroData.username,
+                    theme: cadastroData.theme
+                }
             }
+        });
 
+        if (authError) throw authError;
+
+        // Com "Confirm email" ligado no Supabase, não há sessão até confirmar o e-mail
+        if (authData.session) {
+            await supabaseClient.auth.signOut();
             alert("Conta criada com sucesso! Redirecionando para o login...");
-            window.location.href = "../Login/login.html";
-
-        } catch (error) {
-            console.error("Erro no registo:", error);
-            alert("Erro ao criar conta: " + (error.message || "Tente novamente."));
-            btnFinalize.disabled = false;
-            btnFinalize.textContent = "Finalizar";
+        } else {
+            alert("Conta criada! Confirme seu e-mail e depois faça login.");
         }
-    } else {
-        // Modo simulação caso o Supabase não esteja configurado
-        alert("Simulação de cadastro concluída com sucesso!");
+
+        localStorage.setItem("metohelp_ja_visitou", "true");
         window.location.href = "../Login/login.html";
+
+    } catch (error) {
+        console.error("Erro no registo:", error);
+        const msg = String(error.message || "");
+        if (/already registered/i.test(msg)) {
+            alert("Este e-mail já está cadastrado. Tente fazer login.");
+        } else if (/database error|duplicate|unique/i.test(msg)) {
+            alert("Esse nome de usuário acabou de ser escolhido por outra pessoa. Volte e tente outro.");
+        } else {
+            alert("Erro ao criar conta: " + (msg || "Tente novamente."));
+        }
+        btnFinalize.disabled = false;
+        btnFinalize.textContent = "Finalizar";
     }
 });

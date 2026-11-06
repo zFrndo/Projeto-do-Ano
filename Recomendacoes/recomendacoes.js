@@ -501,3 +501,7 @@ limparFiltros.addEventListener("click", function() {
 
 /* INICIALIZAÇÃO */
 renderizar();
+/* Exige login e mostra a foto de perfil do usuário */
+Metohelp.exigirLogin().then(({ profile }) => {
+    document.getElementById("fotoPerfilRec").src = profile?.foto_url || Metohelp.FOTO_PADRAO;
+});

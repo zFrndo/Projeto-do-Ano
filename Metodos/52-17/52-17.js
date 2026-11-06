@@ -89,6 +89,7 @@ function atualizarTela() {
 
 /* MOSTRAR RECOMENDAÇÕES */
 function mostrarRecomendacoes() {
+    Metohelp.mostrarLivros(document.getElementById("livrosRecomendados"));
     /* Limpa os cards anteriores, para virem novos */
     videosRecomendados.innerHTML = "";
 
@@ -213,3 +214,6 @@ function iniciarTimer() {
 atualizarTela();
 
 iniciarTimer();
+
+/* Exige login, registra a sessão e mostra o botão 'Encerrar sessão' (avaliação) */
+MetohelpFim.iniciar("52-17", "Regra 52/17");

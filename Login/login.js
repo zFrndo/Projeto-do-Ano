@@ -1,18 +1,11 @@
-// Configurações do Supabase
-const SUPABASE_URL = "SUA_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "SUA_SUPABASE_ANON_KEY";
+// Cliente do Supabase (configurado em ../Shared/metohelp.js)
+const supabaseClient = Metohelp.client;
 
-let supabaseClient = null;
-
-if (
-    window.supabase &&
-    SUPABASE_URL !== "SUA_SUPABASE_URL" &&
-    SUPABASE_ANON_KEY !== "SUA_SUPABASE_ANON_KEY"
-) {
-    supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+// Se já estiver logado, vai direto para a Home
+if (supabaseClient) {
+    supabaseClient.auth.getSession().then(({ data }) => {
+        if (data.session) window.location.href = "../Home/index.html";
+    });
 }
 
 // VERIFICAÇÃO DE PRIMEIRO ACESSO:
@@ -57,7 +50,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     if (!supabaseClient) {
         showFeedback(
-            "Configure os dados do Supabase no arquivo login.js.",
+            "Configure os dados do Supabase no arquivo Shared/metohelp.js.",
             "error"
         );
         return;
@@ -111,7 +104,7 @@ loginForm.addEventListener("submit", async (event) => {
 
         // Redirecionamento para a página inicial (Home)
         setTimeout(() => {
-            window.location.href = "../Home/home.html";
+            window.location.href = "../Home/index.html";
         }, 1000);
 
     } catch (error) {

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metohelp - 60-30-10</title>
+    <link rel="stylesheet" href="60-30-10.css">
+</head>
+<body>
+    <main class="metodo-container">
+        <section class="escolha" id="configuracao">
+            <h1>Defina o seu bloco de estudos</h1>
+
+            <div class="seletor-tempo" id="seletorTempo">
+                <div class="campo-tempo">
+                    <button class="seta cima" data-tipo="horas"> ▲ </button>
+                    <span id="horas">00</span>
+                    <button class="seta baixo" data-tipo="horas"> ▼ </button>
+                </div>
+
+                <span class="dois-pontos">:</span>
+
+                <div class="campo-tempo">
+                    <button class="seta cima" data-tipo="minutos"> ▲ </button>
+                    <span id="minutos">00</span>
+                    <button class="seta baixo" data-tipo="minutos"> ▼ </button>
+                </div>
+            </div>
+
+            <p class="explicacao">60% teoria · 30% exercícios · 10% correção</p>
+
+            <button class="botao-comecar" id="botaoComecar"> Começar </button>
+        </section>
+
+        <section class="timer" id="timerTela">
+            <h1 id="tituloTimer">Teoria</h1>
+
+            <div class="fases" id="fases">
+                <span class="fase" data-fase="0">Teoria 60%</span>
+                <span class="fase" data-fase="1">Exercícios 30%</span>
+                <span class="fase" data-fase="2">Correção 10%</span>
+            </div>
+
+            <div class="barra-container">
+                <div class="barra-progresso" id="barraProgresso"></div>
+            </div>
+
+            <p class="tempo-restante" id="tempoRestante"></p>
+        </section>
+
+        <section class="recomendacoes" id="recomendacoes">
+            <h2> Você também pode ver: </h2>
+            <div class="videos" id="videosRecomendados"></div>
+
+            <h2 class="titulo-livros">Que tal ler um livro?</h2>
+            <div class="videos" id="livrosRecomendados"></div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../Shared/metohelp.js"></script>
+    <script src="../../Shared/livros.js"></script>
+    <script src="../../Shared/fim-sessao.js"></script>
+    <script src="60-30-10.js"></script>
+</body>
+</html>
