@@ -6,7 +6,7 @@
 // A sessão só conta no Perfil quando termina: avaliando OU saindo sem avaliar.
 // =====================================================================
 (function () {
-    const HOME_URL = new URL("../Home/index.html", document.currentScript.src).href;
+    const HOME_URL = new URL("../index.html", document.currentScript.src).href;
 
     const css = `
     .mh-encerrar{position:fixed;right:24px;bottom:24px;z-index:900;padding:12px 22px;border-radius:30px;
