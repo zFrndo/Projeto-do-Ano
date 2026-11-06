@@ -159,7 +159,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_m2a-Uwm7MHGgZHACTzj7Ew_6gos-Qnv";
         return data.publicUrl;
     }
 
-    const FOTO_PADRAO = "../Imagens/Logo_V2.png";
+    const FOTO_PADRAO = "https://bieogiolbczcnyjkywqp.supabase.co/storage/v1/object/public/avatars/Logo_V2.png";
 
     window.Metohelp = {
         client, configurado, METAS, FOTO_PADRAO, LOGIN_URL,
